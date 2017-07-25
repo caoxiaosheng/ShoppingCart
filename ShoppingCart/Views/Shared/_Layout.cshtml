@@ -25,16 +25,24 @@
                     <li>@Html.ActionLink("关于", "About", "Home")</li>
                     <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>
                 </ul>
+                <div class="navbar-right" id="cart-details">
+                    @Html.Action("Summary","Carts")
+                </div>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 应用程序</p>
-        </footer>
+<div class="container body-content">
+    <div class="well well-lg col-lg-3">
+        @Html.Action("Menu","Categories",new {selectedCategoryId=ViewBag.SelectedCategoryId!=null?ViewBag.SelectedCategoryId:0})
     </div>
+    <div class="col-lg-9">
+        @RenderBody()
+    </div>
+    <hr/>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 应用程序</p>
+    </footer>
+</div>
 
     @Scripts.Render("~/bundles/shoppingCart")
     @RenderSection("scripts", required: false)
