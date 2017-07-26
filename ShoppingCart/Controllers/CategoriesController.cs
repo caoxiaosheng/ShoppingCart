@@ -10,6 +10,7 @@ namespace ShoppingCart.Controllers
     {
         private  readonly  CategoryService _categoryService=new CategoryService();
         
+        [ChildActionOnly]
         public ActionResult Menu(int selectedcategoryid)
         {
             var categories = _categoryService.Get();
