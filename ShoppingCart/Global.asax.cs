@@ -29,6 +29,11 @@ namespace ShoppingCart
                 item.CreateMap<Book, BookViewModel>();
                 item.CreateMap<Author, AuthorViewModel>();
                 item.CreateMap<Category, CategoryViewModel>();
+
+                item.CreateMap<CartItemViewModel, CartItem> ();
+                item.CreateMap< BookViewModel, Book > ();
+                item.CreateMap<AuthorViewModel ,Author> ();
+                item.CreateMap<CategoryViewModel, Category> ();
             });
 
             var dbContext=new ShoppingCartContext();

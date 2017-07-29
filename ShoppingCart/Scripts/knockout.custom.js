@@ -1,11 +1,27 @@
-﻿ko.extenders.subTotal = function(target, multiplier) {
+﻿ko.bindingHandlers.isDirty = {
+    init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var originalValue = ko.unwrap(valueAccessor());
+
+        var interceptor = ko.pureComputed(function () {
+            return (bindingContext.$data.showButton !== undefined && bindingContext.$data.showButton)
+                || originalValue != valueAccessor()();
+        });
+
+        ko.applyBindingsToNode(element, {
+            visible: interceptor
+        });
+    }
+};
+
+ko.extenders.subTotal = function (target, multiplier) {
     target.subTotal = ko.observable();
 
-    function calculateTotal(newvalue) {
-        target.subtotal((newvalue * multiplier).toFixed(2));
+    function calculateTotal(newValue) {
+        target.subTotal((newValue * multiplier).toFixed(2));
     };
 
     calculateTotal(target());
+
     target.subscribe(calculateTotal);
 
     return target;

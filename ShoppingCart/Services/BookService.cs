@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Web;
 using ShoppingCart.DAL;
@@ -20,6 +21,16 @@ namespace ShoppingCart.Services
         {
             return _shoppingCartContext.Books.Include("Author").Where(b => b.CategoryId == categoryId)
                 .OrderByDescending(b => b.Featured).ToList();
+        }
+
+        public Book GetById(int id)
+        {
+            var books = _shoppingCartContext.Books.Include("Author").SingleOrDefault(item => item.Id == id);
+            if (books == null)
+            {
+                throw new ObjectNotFoundException($"找不到Id为{id}的书");
+            }
+            return books;
         }
 
         public void Dispose()

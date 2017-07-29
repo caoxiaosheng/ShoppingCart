@@ -24,6 +24,12 @@ namespace ShoppingCart.Controllers
             return View(AutoMapper.Mapper.Map<List<Book>, List<BookViewModel>>(books));
         }
 
+        public ActionResult Details(int id)
+        {
+            var book = _bookService.GetById(id);
+            return View(AutoMapper.Mapper.Map<Book, BookViewModel>(book));
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -31,11 +37,6 @@ namespace ShoppingCart.Controllers
                 _bookService.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        public ActionResult Details(int id)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }
