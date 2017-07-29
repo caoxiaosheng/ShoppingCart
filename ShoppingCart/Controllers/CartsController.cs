@@ -10,7 +10,6 @@ namespace ShoppingCart.Controllers
     {
         private readonly CartService _cartService=new CartService();
 
-
         [ChildActionOnly]
         public PartialViewResult Summary()
         {
@@ -25,6 +24,11 @@ namespace ShoppingCart.Controllers
                 _cartService.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Index()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
